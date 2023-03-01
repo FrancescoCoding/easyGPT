@@ -19,7 +19,7 @@ git clone https://github.com/FrancescoCoding/Node-chatGPT-api-starter-template.g
 ```
 Navigate to the newly created directory:
 ```
-cd node-chatgpt3.5-api-starter-template
+cd Node-chatGPT-api-starter-template
 ```
 Install the dependencies using the following command:
 ```
