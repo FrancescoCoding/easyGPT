@@ -13,7 +13,7 @@ An [API key](https://platform.openai.com/account/api-keys) for authentication pu
 
 Open a terminal window and navigate to the directory where you want to clone the repository and run the following command:
 ```
-git clone https://github.com/FrancescoCoding/node-chatgpt3.5-api-starter-template.git
+git clone https://github.com/FrancescoCoding/Node-chatGPT-api-starter-template.git
 ```
 Navigate to the newly created directory:
 ```
