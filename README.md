@@ -5,13 +5,9 @@ This quick guide provides step-by-step instructions for creating a Node.js serve
 For more information about how the API works and fine-tuning for specific cases, please refer to [OpenAI's official documentation](https://platform.openai.com/docs/introduction)
 
 ## Prerequisites
-Basic knowledge of Node.js  
-Node.js (at least version 14.x)  
-An [API key](https://platform.openai.com/account/api-keys) for authentication purposes
-
-
-
-
+- Basic knowledge of Node.js  
+- Node.js (at least version 14.x)  
+- An [API key](https://platform.openai.com/account/api-keys) for authentication purposes
 
 
 ## Setup
