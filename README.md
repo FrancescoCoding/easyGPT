@@ -9,7 +9,13 @@ Basic knowledge of Node.js
 Node.js (at least version 14.x)  
 An [API key](https://platform.openai.com/account/api-keys) for authentication purposes
 
+
+
+
+
+
 ## Setup
+<a href="url"><img src="https://user-images.githubusercontent.com/64712227/222249055-7051defe-03d8-45ab-933e-3fc2fe3eee9d.png" align="left" height="230" ></a>
 
 Open a terminal window and navigate to the directory where you want to clone the repository and run the following command:
 ```
