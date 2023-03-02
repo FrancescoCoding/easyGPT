@@ -13,16 +13,5 @@
     "chatgpt-wrapper",
     "easygpt"
   ],
-  "license": "MIT",
-  "dependencies": {
-    "axios": "^1.3.3",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "nodemon": "^2.0.20"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.21.0",
-    "@babel/core": "^7.21.0",
-    "@babel/preset-env": "^7.20.2"
-  }
+  "license": "MIT"
 }
