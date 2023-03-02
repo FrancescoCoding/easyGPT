@@ -1,4 +1,4 @@
-# Node Template for gpt-3.5 (ChatGPT model) API 🤖
+# Node Template for gpt-3.5-turbo (ChatGPT model) API 🤖
 
 This quick guide provides step-by-step instructions for creating a Node.js server that sends requests to the ChatGPT API to generate responses for your chatbot.
 
