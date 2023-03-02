@@ -21,8 +21,6 @@ app.post("/askgpt", async (req, res) => {
     gpt.addMessage(message.content, message.role);
   });
 
-  // console.log(gpt);
-
   try {
     const response = await gpt.ask();
     res.json({
