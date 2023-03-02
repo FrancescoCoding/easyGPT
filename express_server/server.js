@@ -19,12 +19,12 @@ app.post("/askgpt", async (req, res) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${OPENAI_API_KEY}`,
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
         model: model ?? "gpt-3.5-turbo",
         messages: messages,
-      }), 
+      }),
     });
 
     const responseJson = await response.json();
