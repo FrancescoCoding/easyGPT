@@ -1,4 +1,4 @@
-# easyGPT: A ChatGPT Express server and Node module 🤖
+# easyGPT: A ChatGPT Express server and npm module 🤖
 
 ## This project contains:
 <a href="url"><img src="https://user-images.githubusercontent.com/64712227/222500018-e1aa2fe4-9a61-4205-bba8-f1d41b102156.png" align="left" height="350" ></a>
