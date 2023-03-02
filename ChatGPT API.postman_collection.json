@@ -1,43 +1,39 @@
 {
-	"info": {
-		"_postman_id": "c2386949-2b3f-40dd-993e-0a9f542321b6",
-		"name": "ChatGPT API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "22683433"
-	},
-	"item": [
-		{
-			"name": "ChatGPT API",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer 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",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"model\": \"gpt-3.5-turbo\",\r\n    \"messages\": [\r\n        {\r\n            \"role\": \"user\",\r\n            \"content\": \"Just a friendly hello from Francesco!\"\r\n        }\r\n    ]\r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3000/ask-gpt3.5",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"ask-gpt3.5"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "c2386949-2b3f-40dd-993e-0a9f542321b6",
+    "name": "ChatGPT API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "22683433"
+  },
+  "item": [
+    {
+      "name": "ChatGPT API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer <your-openai-api-key>",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"model\": \"gpt-3.5-turbo\",\r\n    \"messages\": [\r\n        {\r\n            \"role\": \"user\",\r\n            \"content\": \"Just a friendly hello from a dev!\"\r\n        }\r\n    ]\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/ask-gpt3.5",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["ask-gpt3.5"]
+        }
+      },
+      "response": []
+    }
+  ]
 }
