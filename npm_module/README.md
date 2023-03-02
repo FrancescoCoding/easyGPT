@@ -11,6 +11,7 @@ For more information about how the API works and fine-tuning for specific cases,
 - Basic knowledge of Node.js
 - Node.js (at least version 14.x)
 - An [API key](https://platform.openai.com/account/api-keys) for authentication purposes
+- Your project must be configured to use ES6 modules.
 
 ## Setup
 

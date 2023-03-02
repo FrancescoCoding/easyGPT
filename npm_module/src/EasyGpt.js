@@ -79,7 +79,7 @@ export default class EasyGpt {
                 rawResult: response.data
             }
         } catch(e) {
-            throw Error("Error requesting to ChatGPT, is your API key valid? or is ChatGPT down?");
+            throw Error("Error requesting to ChatGPT, is your API key valid? or is ChatGPT down? Possibly rate limited?");
         }
     }
 
