@@ -12,8 +12,6 @@ For more information about how the API works and fine-tuning for specific cases,
 
 ## Setup
 
-`<a href="url"><img src="https://user-images.githubusercontent.com/64712227/222249055-7051defe-03d8-45ab-933e-3fc2fe3eee9d.png" align="left" height="230" >``</a>`
-
 Open a terminal window and install the module.
 
 ```
