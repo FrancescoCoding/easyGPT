@@ -1,5 +1,6 @@
-const express = require("express");
-const dotenv = require("dotenv");
+import express from "express";
+import dotenv from "dotenv";
+import EasyGpt from "easygpt";
 
 const app = express();
 app.use(express.json());
@@ -11,32 +12,24 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY; // Your OpenAI API Key
 app.post("/askgpt", async (req, res) => {
   const model = req.body.model;
   const messages = req.body.messages;
-  const apiUrl = "https://api.openai.com/v1/chat/completions"; // ChatGPT API URL
 
-  // Below is the fetch request to the ChatGPT API
+  let gpt = new EasyGpt();
+  gpt.setApiKey(OPENAI_API_KEY);
+  gpt.changeModel(model ?? "gpt-3.5-turbo");
+
+  messages.forEach((message) => {
+    gpt.addMessage(message.content, message.role);
+  });
+
   try {
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: model ?? "gpt-3.5-turbo",
-        messages: messages,
-      }),
-    });
-
-    const responseJson = await response.json();
-
+    const response = await gpt.ask();
     res.json({
-      answer: responseJson.choices[0].message.content, // The answer from the ChatGPT API
+      answer: response.content,
     });
   } catch (error) {
-    // If there is an error, log it to the console
     console.error(error);
     res.status(500).json({
-      error: "Failed to ask ChatGPT API",
+      error: "Failed to ask ChatGPT API" + error,
     });
   }
 });
