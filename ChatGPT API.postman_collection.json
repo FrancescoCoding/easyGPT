@@ -17,7 +17,7 @@
           },
           {
             "key": "Authorization",
-            "value": "Bearer <your-openai-api-key>",
+            "value": "Bearer {{{{OPENAI_API_KEY}}}}",
             "type": "text"
           }
         ],
