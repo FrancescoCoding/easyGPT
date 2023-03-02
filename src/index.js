@@ -70,7 +70,7 @@ export default class AskGpt {
             const messageContent = response.data.choices[0].message.content;
 
             // Automatically add message to message list.
-            if(saveContext) {
+            if(this.saveContext) {
                 this.addMessage(messageContent, "assistant");
             }
     
