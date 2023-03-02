@@ -1,5 +1,4 @@
 const express = require("express");
-const axios = require("axios");
 const dotenv = require("dotenv");
 
 const app = express();
@@ -14,24 +13,24 @@ app.post("/askgpt", async (req, res) => {
   const messages = req.body.messages;
   const apiUrl = "https://api.openai.com/v1/chat/completions"; // ChatGPT API URL
 
-  // Below is the axios request to the ChatGPT API
+  // Below is the fetch request to the ChatGPT API
   try {
-    const response = await axios.post(
-      apiUrl,
-      {
-        model: model ? model : "gpt-3.5-turbo",
-        messages: messages,
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${OPENAI_API_KEY}`,
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${OPENAI_API_KEY}`,
-        },
-      }
-    );
+      body: JSON.stringify({
+        model: model ?? "gpt-3.5-turbo",
+        messages: messages,
+      }), 
+    });
+
+    const responseJson = await response.json();
 
     res.json({
-      answer: response.data.choices[0].message.content, // The answer from the ChatGPT API
+      answer: responseJson.choices[0].message.content, // The answer from the ChatGPT API
     });
   } catch (error) {
     // If there is an error, log it to the console
