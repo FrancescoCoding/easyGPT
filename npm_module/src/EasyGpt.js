@@ -1,3 +1,4 @@
+import axios from "axios";
 import Message from "./Message.js";
 
 export default class EasyGpt {
@@ -54,20 +55,21 @@ export default class EasyGpt {
     const apiUrl = "https://api.openai.com/v1/chat/completions"; // ChatGPT API URL
 
     try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${this.API_KEY}`,
-        },
-        body: JSON.stringify({
+      const response = await axios.post(
+        apiUrl,
+        {
           model: this.model,
           messages: this.#createMessageFormElement(),
-        }),
-      });
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${this.API_KEY}`,
+          },
+        }
+      );
 
-      const responseJson = await response.json();
-      const messageContent = responseJson.choices[0].message.content;
+      const messageContent = response.data.choices[0].message.content;
 
       // Automatically add message to message list.
       if (this.saveContext) {
@@ -76,13 +78,10 @@ export default class EasyGpt {
 
       return {
         content: messageContent,
-        rawResult: responseJson,
+        rawResult: response.data,
       };
     } catch (error) {
-      throw Error(
-        "Error requesting to ChatGPT, is your API key valid? or is ChatGPT down? Possibly rate limited?" +
-          error
-      );
+      throw Error("Error requesting to ChatGPT. Error: " + error);
     }
   }
 
