@@ -28,7 +28,7 @@ import EasyGpt from "easygpt";
 Create a new instance of EasyGpt.
 
 ```javascript
-const gpt = new EasyGPT();
+const gpt = new EasyGpt();
 ```
 
 Set your API key.
