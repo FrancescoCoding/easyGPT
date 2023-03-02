@@ -1,7 +1,5 @@
 # easyGPT: a gpt-3.5-turbo (ChatGPT model) API wrapper 🤖
 
-## Also available on the [npm](https://www.npmjs.com/package/easygpt) website!
-
 This quick guide provides step-by-step instructions for using the easygpt wrapper that sends requests to the ChatGPT API and returns you a response.
 
 For more information about how the API works and fine-tuning for specific cases, please refer to [OpenAI&#39;s official documentation](https://platform.openai.com/docs/introduction)
@@ -59,9 +57,9 @@ gpt
 Ask chatgpt.
 
 ```javascript
-gpt.ask().then(response => {
-	console.log(response.content)
-})
+gpt.ask().then((response) => {
+  console.log(response.content);
+});
 
 // A rawResult object is also appended to the response object, if you need more information.
 
