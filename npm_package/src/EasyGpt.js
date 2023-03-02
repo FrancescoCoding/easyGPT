@@ -1,7 +1,7 @@
 import axios from "axios";
 import Message from "./Message.js";
 
-export default class AskGpt {
+export default class EasyGpt {
     constructor(saveContext) {
         this.model = "gpt-3.5-turbo";
         this.messages = [];
