@@ -1,4 +1,6 @@
-# easygpt a gpt-3.5-turbo (ChatGPT model) API wrapper 🤖
+# easyGPT: a gpt-3.5-turbo (ChatGPT model) API wrapper 🤖
+
+## Also available on the [npm](https://www.npmjs.com/package/easygpt) website!
 
 This quick guide provides step-by-step instructions for using the easygpt wrapper that sends requests to the ChatGPT API and returns you a response.
 
@@ -60,15 +62,14 @@ gpt.ask().then(response => {
 	console.log(response.content)
 })
 
-// also a rawResult object is appended to the response object, if you need more information.
+// A rawResult object is also appended to the response object, if you need more information.
 
 // ALTERNATIVE METHOD WITH AWAIT
-
 const response = await gpt.ask();
 console.log(response.content);
 ```
 
-**By default context is saved. So when you ask ChatGpt, it's answer will automatically be added to the list of messages. To disable this, disable context saving in the constructor.**
+**By default context is saved. So when you ask ChatGpt, its answer will automatically be added to the list of messages. To disable this, disable context saving in the constructor.**
 
 ```javascript
 const gpt = new EasyGpt(false);
