@@ -1,65 +1,83 @@
-# Node Template for gpt-3.5-turbo (ChatGPT model) API 🤖
+# easygpt a gpt-3.5-turbo (ChatGPT model) API wrapper 🤖
 
-This quick guide provides step-by-step instructions for creating a Node.js server that sends requests to the ChatGPT API to generate responses for your chatbot.
+This quick guide provides step-by-step instructions for using the easygpt wrapper that sends requests to the ChatGPT API and returns you a response.
 
-For more information about how the API works and fine-tuning for specific cases, please refer to [OpenAI's official documentation](https://platform.openai.com/docs/introduction)
+For more information about how the API works and fine-tuning for specific cases, please refer to [OpenAI&#39;s official documentation](https://platform.openai.com/docs/introduction)
 
 ## Prerequisites
-- Basic knowledge of Node.js  
-- Node.js (at least version 14.x)  
+
+- Basic knowledge of Node.js
+- Node.js (at least version 14.x)
 - An [API key](https://platform.openai.com/account/api-keys) for authentication purposes
 
-
 ## Setup
-<a href="url"><img src="https://user-images.githubusercontent.com/64712227/222249055-7051defe-03d8-45ab-933e-3fc2fe3eee9d.png" align="left" height="230" ></a>
 
-Open a terminal window and navigate to the directory where you want to clone the repository and run the following command:
+`<a href="url"><img src="https://user-images.githubusercontent.com/64712227/222249055-7051defe-03d8-45ab-933e-3fc2fe3eee9d.png" align="left" height="230" >``</a>`
+
+Open a terminal window and install the module.
+
 ```
-git clone https://github.com/FrancescoCoding/Node-chatGPT-api-starter-template.git
-```
-Navigate to the newly created directory:
-```
-cd Node-chatGPT-api-starter-template
-```
-Install the dependencies using the following command:
-```
-npm install
-```
-Create a .env file in the root directory of the project and add the following line:
-```
-OPENAI_API_KEY=<your-api-key>
+npm i easygpt
 ```
 
-## Running the server
-```
-npm start
-```
+Import the package.
 
-The server should now be running on http://localhost:3000. You can test the server by sending a POST request to http://localhost:3000/ask-gpt3.5 with the following JSON body:
-```
-    "messages": [
-        {
-            "role": "user",
-            "content": "Hello ChatGPT!"
-        }
-    ]
-```
-Replace "Hello, ChatGPT!" with your own message.
-
-The response should contain the generated text from the ChatGPT API:
-```
-{
-    "answer": "Hello Francesco! Nice to meet you. How can I assist you today?"
-}
+```javascript
+import EasyGpt from "easygpt";
 ```
 
-You can also find the Postman collection for the request in this repository
+Create a new instance of EasyGpt.
 
-![image](https://user-images.githubusercontent.com/64712227/222243778-33f204b8-83d9-4069-bb69-a1a3c440fd82.png)
+```javascript
+const gpt = new EasyGPT();
+```
 
+Set your API key.
 
-Awesome, you have successfully set up a server that can communicate with the ChatGPT API and generate responses for your chatbot.  
+```javascript
+gpt.setApiKey("your API key goes here.");
+```
 
-This server can be used as a starting point for building your own chatbot or integrating ChatGPT into an existing chatbot. With a few modifications, you can customize the server to suit your specific needs and requirements.
+## Usage
 
+Add a message. (Note: you can add multiple messages to keep the context.)
 
+```javascript
+/*
+    There are two paramaters of addMessage.
+        1.) The message content.
+        2.) The role of the user (system, user, assistant). https://platform.openai.com/docs/guides/chat/introduction
+        if no role is provided it automatically defaults to "user".
+*/
+gpt
+    .addMessage("Who won the world series in 2020?")    // Below is chatgpt's response
+    .addMessage("The Los Angeles Dodgers won the World Series in 2020.", "assistant")
+    .addMessage("Where was it played?")
+```
+
+Ask chatgpt.
+
+```javascript
+gpt.ask().then(response => {
+	console.log(response.content)
+})
+
+// also a rawResult object is appended to the response object, if you need more information.
+
+// ALTERNATIVE METHOD WITH AWAIT
+
+const response = await gpt.ask();
+console.log(response.content);
+```
+
+**By default context is saved. So when you ask ChatGpt, it's answer will automatically be added to the list of messages. To disable this, disable context saving in the constructor.**
+
+```javascript
+const gpt = new EasyGpt(false);
+```
+
+## Finishing notes
+
+Messages are not cleared when you use the ask() function. The context is saved allowing you to add more messages without repetition. If you need to clear the messages you will need to create a new instance of EasyGpt.
+
+Created by [Francesco Gruosso](https://github.com/FrancescoCoding) and [Adam Govier](https://github.com/AdamGovier)
