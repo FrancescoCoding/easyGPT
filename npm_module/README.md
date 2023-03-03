@@ -37,20 +37,13 @@ Set your API key.
 gpt.setApiKey("your API key goes here.");
 ```
 
+Create one for free @ [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys)
+
 ## Quickstart
 
 ### Basic Example
 
 ```javascript
-import EasyGpt from "easygpt";
-
-// Create a new instance / context of EasyGpt.
-const gpt = new EasyGpt();
-
-// Set your API key.
-// Create one for free @ https://platform.openai.com/account/api-keys
-gpt.setApiKey("<API KEY HERE>");
-
 // Add a prompt you would like to say to ChatGPT.
 gpt.addMessage("Hello ChatGPT!");
 
@@ -67,15 +60,6 @@ console.log(response.content);
 ### Multiple Messages
 
 ```javascript
-import EasyGpt from "easygpt";
-
-// Create a new instance / context of EasyGpt.
-const gpt = new EasyGpt();
-
-// Set your API key.
-// Create one for free @ https://platform.openai.com/account/api-keys
-gpt.setApiKey("< YOUR API KEY>");
-
 // Add a prompt you would like to say to ChatGPT.
 gpt.addMessage("Hello ChatGPT! My name is Adam!");
 
