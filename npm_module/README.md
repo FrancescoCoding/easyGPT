@@ -37,45 +37,90 @@ Set your API key.
 gpt.setApiKey("your API key goes here.");
 ```
 
-## Usage
+Create one for free @ [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys)
 
-Add a message. (Note: you can add multiple messages to keep the context.)
+## Quickstart
 
-```javascript
-/*
-    There are two paramaters of addMessage.
-        1.) The message content.
-        2.) The role of the user (system, user, assistant). https://platform.openai.com/docs/guides/chat/introduction
-        if no role is provided it automatically defaults to "user".
-*/
-gpt
-    .addMessage("Who won the world series in 2020?")    // Below is chatgpt's response
-    .addMessage("The Los Angeles Dodgers won the World Series in 2020.", "assistant")
-    .addMessage("Where was it played?")
-```
-
-Ask chatgpt.
+### Basic Example
 
 ```javascript
-gpt.ask().then((response) => {
-  console.log(response.content);
-});
+// Add a prompt you would like to say to ChatGPT.
+gpt.addMessage("Hello ChatGPT!");
 
-// A rawResult object is also appended to the response object, if you need more information.
-
-// ALTERNATIVE METHOD WITH AWAIT
+// Get the response from ChatGPT.
 const response = await gpt.ask();
+
+// Print ChatGPT's response to the console!
 console.log(response.content);
+
+// EXAMPLE OUTPUT
+// ! Hello! How can I assist you today?
 ```
 
-**By default context is saved. So when you ask ChatGpt, its answer will automatically be added to the list of messages. To disable this, disable context saving in the constructor.**
+### Multiple Messages
 
 ```javascript
-const gpt = new EasyGpt(false);
+// Add a prompt you would like to say to ChatGPT.
+gpt.addMessage("Hello ChatGPT! My name is Adam!");
+
+// ChatGPT API response.
+// The reason for "let" is that we will be reusing response later.
+let response = await gpt.ask();
+
+// Print ChatGPT's response to the console!
+console.log(response.content);
+
+// EXAMPLE OUTPUT
+// ! Hello Adam! It's nice to meet you. How can I assist you today?
+
+// Add an aditional message to the stack.
+gpt.addMessage("What was my name again?");
+
+// ChatGPT API response.
+response = await gpt.ask();
+
+// Print ChatGPT's response to the console!
+console.log(response.content);
+
+// EXAMPLE OUTPUT
+// ! Your name is Adam.
+
 ```
+
+## Further Examples
+
+[Examples](https://github.com/FrancescoCoding/easyGPT/tree/main/npm_module/examples)
+
+## Documentation
+
+### Class EasyGpt
+
+| Constructor |
+| ----------- |
+
+| Paramater   | Explanation                                                                                                                                                                                                                                                      |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| saveContext | saveContext allows you to disable the saving of messages, rules & responses.<br />By default this is set to true. Please see this [example](https://github.com/FrancescoCoding/easyGPT/blob/main/npm_module/examples/noContext.js) for a more clear understanding. |
+
+| Method      | Parameters        | Explanation                                                                                                                                                                                                                                                                                                                                                                                   |
+| ----------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| setApiKey   | {String} API_KEY  | To use ChatGPT's API you are required to provide an API key.<br />You can acquire one from [Account API Keys - OpenAI](https://platform.openai.com/account/api-keys).                                                                                                                                                                                                                           |
+| changeModel | {String} model    | [Models - OpenAI API](https://platform.openai.com/docs/models/gpt-3) - You can expirement with different OpenAI models.<br />easyGPT defaults to "gpt-3.5-turbo". Limited testing has been done with other models.                                                                                                                                                                              |
+| addRule     | {String} rule     | Limit ChatGPT's response within certain boundries. Check out<br />[Chat completion - OpenAI API](https://platform.openai.com/docs/guides/chat/introduction), for the addRule method easyGpt uses <br />"system" as the role. For an example of addRule in use look at<br />[pirateRule.js](https://github.com/FrancescoCoding/easyGPT/blob/main/npm_module/examples/pirateRule.js).                |
+| addResponse | {String} content | Manually add a response from ChatGPT. Check out<br />[Chat completion - OpenAI API](https://platform.openai.com/docs/guides/chat/introduction), for the addResponse method easyGPT<br />uses "assistant" as the role. For an example of addResponse in use<br />look at **[framedResponse.js](https://github.com/FrancescoCoding/easyGPT/blob/main/npm_module/examples/framedResponse.js).** |
+| addMessage  | {String} content  | Add a prompt to later ask ChatGPT. Check out<br />[Chat completion - OpenAI API](https://platform.openai.com/docs/guides/chat/introduction), for the addMessage method easyGPT<br />uses "user" as the role.                                                                                                                                                                                     |
+| clearChat   |                   | Clears the list of previous messages, responses and rules. For a<br />completely new conversation.                                                                                                                                                                                                                                                                                            |
+| importChat  | {Array} chatLog  | A list of messages, exported from exportChat(); You might use<br />this to import a previously saved conversation.                                                                                                                                                                                                                                                                            |
+| exportChat  |                   | Returns a list of messages which can be saved or added to a<br />new instance with importChat.                                                                                                                                                                                                                                                                                                |
+| async ask   |                   | Returns a response from the ChatGPT API for your list of messages,<br />rules & responses. You must await for this response.                                                                                                                                                                                                                                                                  |
+
+### Response Object
+
+| Field     | Type     | Explanation                                   |
+| --------- | -------- | --------------------------------------------- |
+| content   | {String} | The text output of ChatGPT.                   |
+| rawResult | {Object} | The raw result obtained from the ChatGPT API. |
 
 ## Finishing notes
-
-Messages are not cleared when you use the ask() function. The context is saved allowing you to add more messages without repetition. If you need to clear the messages you will need to create a new instance of EasyGpt.
 
 Created by [Francesco Gruosso](https://github.com/FrancescoCoding) and [Adam Govier](https://github.com/AdamGovier)

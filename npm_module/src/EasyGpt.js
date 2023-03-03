@@ -2,9 +2,11 @@ import axios from "axios";
 import Message from "./Message.js";
 
 export default class EasyGpt {
+   #messages;
+
   constructor(saveContext) {
     this.model = "gpt-3.5-turbo";
-    this.messages = [];
+    this.#messages = [];
     this.saveContext = saveContext ?? true;
   }
 
@@ -32,12 +34,23 @@ export default class EasyGpt {
   }
 
   /**
-   * addRules is a function that allows you to add rules to the chatbot
-   *  @param {String} rules The rules you want to add to the chatbot
+   * addRule is a function that allows you to add a rule to the chatbot.
+   *  @param {String} rule The rule you want to add to the chatbot.
    *  @returns working instance.
    */
-  addRules(rules) {
-    this.addMessage(rules, "system");
+  addRule(rule) {
+    this.addMessage(rule, "system");
+
+    return this;
+  }
+
+  /**
+   * Manually add a chatGPT response to the messages list. 
+   * @param {String} content The message content
+   * @returns working instance.
+   */
+  addResponse(content) {
+    this.#messages.push(new Message(content, "assistant"));
 
     return this;
   }
@@ -45,13 +58,42 @@ export default class EasyGpt {
   /**
    * add a message to the list of messages.
    * @param {String} content The message content
-   * @param {String} role * optional the sender role. https://platform.openai.com/docs/guides/chat/introduction
    * @returns working instance.
    */
-  addMessage(content, role) {
-    this.messages.push(new Message(content, role));
+  addMessage(content) {
+    this.#messages.push(new Message(content, "user"));
 
     return this;
+  }
+
+  /**
+   * Removes all rules and previous messages.
+   * @returns working instance.
+   */
+  clearChat() {
+    this.#messages = [];
+
+    return this;
+  }
+
+  /**
+   * Import a previous chat.
+   * ! If the instance has been used before importing the chat, you may want to clear the chat using ```instace.clearChat();```
+   * @param {Array} chatLog An array of messages. Typically retrieved from ```instance.exportChat();```
+   * @returns working instance.
+   */
+  importChat(chatLog) {
+    this.#messages = [...this.#messages, ...chatLog];
+
+    return this;
+  }
+
+  /**
+   * Export the chat log so you can save it and import it again at a later date.
+   * @returns chatLog: an array of messages.
+   */
+  exportChat() {
+    return this.#messages;
   }
 
   /**
@@ -85,6 +127,8 @@ export default class EasyGpt {
       // Automatically add message to message list.
       if (this.saveContext) {
         this.addMessage(messageContent, "assistant");
+      } else {
+        this.clearChat(); // Remove context.
       }
 
       return {
@@ -103,7 +147,7 @@ export default class EasyGpt {
   #createMessageFormElement() {
     let tempMessagesArray = [];
 
-    for (const message of this.messages) {
+    for (const message of this.#messages) {
       tempMessagesArray.push({
         content: message.content,
         role: message.role,
