@@ -32,6 +32,17 @@ export default class EasyGpt {
   }
 
   /**
+   * addRules is a function that allows you to add rules to the chatbot
+   *  @param {String} rules The rules you want to add to the chatbot
+   *  @returns working instance.
+   */
+  addRules(rules) {
+    this.addMessage(rules, "system");
+
+    return this;
+  }
+
+  /**
    * add a message to the list of messages.
    * @param {String} content The message content
    * @param {String} role * optional the sender role. https://platform.openai.com/docs/guides/chat/introduction
@@ -44,7 +55,7 @@ export default class EasyGpt {
   }
 
   /**
-   * Ask's ChatGpt.
+   * Asks ChatGpt.
    * You must await the answer.
    * @returns The message content.
    */

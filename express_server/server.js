@@ -17,14 +17,24 @@ app.post("/askgpt", async (req, res) => {
   gpt.setApiKey(OPENAI_API_KEY);
   gpt.changeModel(model ?? "gpt-3.5-turbo");
 
-  messages.forEach((message) => {
-    gpt.addMessage(message.content, message.role);
-  });
-
   try {
-    const response = await gpt.ask();
+    const responses = await Promise.all(
+      messages.map(async (message) => {
+        gpt.addMessage(message.content, message.role);
+        return await gpt.ask();
+      })
+    );
+
+    responses.forEach((response, index) => {
+      if (messages[index].role !== "system") {
+        console.log(response.content);
+      }
+    });
+
     res.json({
-      answer: response.content,
+      answers: responses
+        .filter((response, index) => messages[index].role !== "system")
+        .map((response) => response.content),
     });
   } catch (error) {
     console.error(error);

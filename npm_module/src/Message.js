@@ -1,8 +1,8 @@
 export default class Message {
-    constructor(content, role) {
-        if(!content) throw Error("Pleae provide a message.");
+  constructor(content, role) {
+    if (!content) throw Error("Please provide a message.");
 
-        this.content = content;
-        this.role = role ?? "user";
-    }
+    this.content = content;
+    this.role = role ?? "user";
+  }
 }
