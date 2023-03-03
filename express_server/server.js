@@ -10,14 +10,24 @@ dotenv.config(); // Load .env file
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY; // Your OpenAI API Key
 
 app.post("/askgpt", async (req, res) => {
-  const model = req.body.model;
   const messages = req.body.messages;
 
   let gpt = new EasyGpt();
-  gpt.setApiKey(OPENAI_API_KEY);
-  gpt.changeModel(model ?? "gpt-3.5-turbo");
+
+  gpt
+    .setApiKey(OPENAI_API_KEY)
+    .addRules(
+      "From now on all of your responses will be with the tone of a mysterious philosopher and all your answers are vague and contain emojis"
+    );
+
+  // .addMessage("Hello, who are thou?");
+  // ^Add a message to the list of messages with our module's method,
+  // if you use the above, you can comment out the following lines to see the answer:
+  // const response = await gpt.ask(); // Ask ChatGPT for an answer
+  // console.log(response.content); // Log the answer to the console
 
   try {
+    // Process multiple messages sent by the user in the body of the request
     const responses = await Promise.all(
       messages.map(async (message) => {
         gpt.addMessage(message.content, message.role);
@@ -25,12 +35,14 @@ app.post("/askgpt", async (req, res) => {
       })
     );
 
+    // Log the answers to the console
     responses.forEach((response, index) => {
       if (messages[index].role !== "system") {
         console.log(response.content);
       }
     });
 
+    // Send the answers back to the client
     res.json({
       answers: responses
         .filter((response, index) => messages[index].role !== "system")
@@ -38,6 +50,7 @@ app.post("/askgpt", async (req, res) => {
     });
   } catch (error) {
     console.error(error);
+
     res.status(500).json({
       error: "Failed to ask ChatGPT API" + error,
     });

@@ -1,0 +1,85 @@
+{
+  "info": {
+    "_postman_id": "c2386949-2b3f-40dd-993e-0a9f542321b6",
+    "name": "easyGPT",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "22683433"
+  },
+  "item": [
+    {
+      "name": "easyGPT POST",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"messages\": [\n        {\n            \"content\": \"Just a friendly hello from a friendly friend!\"\n        },\n        {\n            \"content\": \"What's your favourite historical figure?\"\n        },\n        {\n            \"content\": \"What's the meaning of life? Tell me!\"\n        }\n    ]\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/askgpt",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["askgpt"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "easyGPT POST with roles",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"messages\": [\r\n        {\r\n            \"role\": \"user\",\r\n            \"content\": \"Just a friendly hello from a friendly friend!\"\r\n        },\r\n        {\r\n            \"role\": \"user\",\r\n            \"content\": \"What's your favourite historical figure?\"\r\n        },\r\n        {\r\n            \"role\": \"user\",\r\n            \"content\": \"What's the meaning of life? Tell me!\"\r\n        }\r\n    ]\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/askgpt",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["askgpt"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "easyGPT POST with instructions",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"messages\": [\r\n        {\r\n            \"role\": \"system\",\r\n            \"content\": \"From now on only speak in a mix of Super Mario and Bugs Bunny\"\r\n        },\r\n        {\r\n            \"role\": \"user\",\r\n            \"content\": \"Just a friendly hello from a friendly friend!\"\r\n        },\r\n        {\r\n            \"role\": \"user\",\r\n            \"content\": \"What's your favourite historical figure?\"\r\n        },\r\n        {\r\n            \"role\": \"user\",\r\n            \"content\": \"What's the meaning of life? Tell me!\"\r\n        }\r\n    ]\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/askgpt",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["askgpt"]
+        },
+        "description": "This request lets you to test the rules quickly from Postman. If you are already using the addRules() method from the easygpt npm module, this will add onto that."
+      },
+      "response": []
+    }
+  ]
+}
