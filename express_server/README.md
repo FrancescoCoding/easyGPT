@@ -15,13 +15,14 @@ For more information about how the API works and fine-tuning for specific cases,
 
 Open a terminal window and navigate to the directory where you want to clone the repository and run the following command:
 ```
-git clone https://github.com/FrancescoCoding/Node-chatGPT-api-starter-template.git
+git clone https://github.com/FrancescoCoding/easyGPT.git
 ```
 Navigate to the newly created directory:
 ```
-cd Node-chatGPT-api-starter-template
+cd easyGPT
+cd node_server
 ```
-Install the dependencies using the following command:
+Open the terminal in that folder and install the dependencies using the following command:
 ```
 npm install
 ```
