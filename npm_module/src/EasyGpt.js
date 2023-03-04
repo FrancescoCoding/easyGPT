@@ -2,7 +2,7 @@ import axios from "axios";
 import Message from "./Message.js";
 
 export default class EasyGpt {
-   #messages;
+  #messages;
 
   constructor(saveContext) {
     this.model = "gpt-3.5-turbo";
@@ -39,13 +39,13 @@ export default class EasyGpt {
    *  @returns working instance.
    */
   addRule(rule) {
-    this.addMessage(rule, "system");
+    this.#messages.push(new Message(rule, "system"));
 
     return this;
   }
 
   /**
-   * Manually add a chatGPT response to the messages list. 
+   * Manually add a chatGPT response to the messages list.
    * @param {String} content The message content
    * @returns working instance.
    */
