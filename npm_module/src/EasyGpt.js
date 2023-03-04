@@ -126,7 +126,7 @@ export default class EasyGpt {
 
       // Automatically add message to message list.
       if (this.saveContext) {
-        this.addMessage(messageContent, "assistant");
+        this.#messages.push(new Message(messageContent, "assistant"));
       } else {
         this.clearChat(); // Remove context.
       }

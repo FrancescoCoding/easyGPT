@@ -1,6 +1,6 @@
 {
   "name": "easygpt",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "NPM module to communicate with the ChatGPT API",
   "main": "index.js",
   "type": "module",
