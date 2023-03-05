@@ -12,17 +12,21 @@ const gpt = new EasyGpt();
 gpt.setApiKey(process.env.API_KEY);
 
 // Ask a focused question with a low temperature
-gpt.addMessage("Finish the first paragraph: The quick brown fox jumps over the lazy dog.");
-gpt.setTemperature(0.2);
+gpt
+    .addMessage("Finish the first paragraph: The quick brown fox jumps over the lazy dog.")
+    .advanced.setTemperature(0.2);
+
 console.log("Focused response.");
 const responseFocused = await gpt.ask();
 console.log(responseFocused.content);
 
 // Ask an unfocused question with a high temperature.
-gpt.clearChat();
-gpt.addMessage("Finish the first paragraph: The quick brown fox jumps over the lazy dog.");
-gpt.setMaxTokens(200); // Added as the response can become very large very quickly.
-gpt.setTemperature(1.6);
+gpt
+    .clearChat()
+    .addMessage("Finish the first paragraph: The quick brown fox jumps over the lazy dog.")
+    .advanced.setMaxTokens(200) // Added as the response can become very large very quickly.
+    .advanced.setTemperature(1.6);
+
 console.log("\nUnfocused response.");
 const responseUnfocused = await gpt.ask();
 console.log(responseUnfocused.content);

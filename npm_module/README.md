@@ -49,9 +49,10 @@ Create one for free @ [https://platform.openai.com/account/api-keys](https://pla
 
 ```javascript
 // Add a prompt you would like to say to ChatGPT.
-gpt.addMessage("Hello ChatGPT!")
-// Give some instructions to the AI
-    .addRule("Use emoticons in every answer and use a friendly tone.")
+gpt
+  .addMessage("Hello ChatGPT!")
+  // Give some instructions to the AI
+  .addRule("Use emoticons in every answer and use a friendly tone.");
 
 // Get the response from ChatGPT.
 const response = await gpt.ask();
@@ -90,7 +91,6 @@ console.log(response.content);
 
 // EXAMPLE OUTPUT
 // ! Your name is Adam.
-
 ```
 
 ## Further Examples
@@ -101,25 +101,39 @@ console.log(response.content);
 
 ### Class EasyGpt
 
-| Constructor |
-| ----------- |
+| Method      | Parameters            | Explanation                                                                                                                                                                                                                                                                                                                                                                                   |
+| ----------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Constructor | {Boolean} saveContext | saveContext allows you to disable the saving of messages, rules & responses.                                                                                                                                                                                                                                                                                                                  |
+| setApiKey   | {String} API_KEY      | To use ChatGPT's API you are required to provide an API key.<br />You can acquire one from [Account API Keys - OpenAI](https://platform.openai.com/account/api-keys).                                                                                                                                                                                                                           |
+| addRule     | {String} rule         | Limit ChatGPT's response within certain boundries. Check out<br />[Chat completion - OpenAI API](https://platform.openai.com/docs/guides/chat/introduction), for the addRule method easyGpt uses <br />"system" as the role. For an example of addRule in use look at<br />[pirateRule.js](https://github.com/FrancescoCoding/easyGPT/blob/main/npm_module/examples/pirateRule.js).                |
+| addResponse | {String} content     | Manually add a response from ChatGPT. Check out<br />[Chat completion - OpenAI API](https://platform.openai.com/docs/guides/chat/introduction), for the addResponse method easyGPT<br />uses "assistant" as the role. For an example of addResponse in use<br />look at **[framedResponse.js](https://github.com/FrancescoCoding/easyGPT/blob/main/npm_module/examples/framedResponse.js).** |
+| addMessage  | {String} content      | Add a prompt to later ask ChatGPT. Check out<br />[Chat completion - OpenAI API](https://platform.openai.com/docs/guides/chat/introduction), for the addMessage method easyGPT<br />uses "user" as the role.                                                                                                                                                                                     |
+| clearChat   |                       | Clears the list of previous messages, responses and rules. For a<br />completely new conversation.                                                                                                                                                                                                                                                                                            |
+| async ask   |                       | Returns a response from the ChatGPT API for your list of messages,<br />rules & responses. You must await for this response.                                                                                                                                                                                                                                                                  |
 
-| Paramater   | Explanation                                                                                                                                                                                                                                                      |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| saveContext | saveContext allows you to disable the saving of messages, rules & responses.<br />By default this is set to true. Please see this [example](https://github.com/FrancescoCoding/easyGPT/blob/main/npm_module/examples/noContext.js) for a more clear understanding. |
+### Advanced
 
-| Method       | Parameters        | Explanation                                                                                                                                                                                                                                                                                                                                                                                   |
-| ------------ | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| setApiKey    | {String} API_KEY  | To use ChatGPT's API you are required to provide an API key.<br />You can acquire one from [Account API Keys - OpenAI](https://platform.openai.com/account/api-keys).                                                                                                                                                                                                                           |
-| changeModel  | {String} model    | [Models - OpenAI API](https://platform.openai.com/docs/models/gpt-3) - You can expirement with different OpenAI models.<br />easyGPT defaults to "gpt-3.5-turbo". Limited testing has been done with other models.                                                                                                                                                                              |
-| addRule      | {String} rule     | Limit ChatGPT's response within certain boundries. Check out<br />[Chat completion - OpenAI API](https://platform.openai.com/docs/guides/chat/introduction), for the addRule method easyGpt uses <br />"system" as the role. For an example of addRule in use look at<br />[pirateRule.js](https://github.com/FrancescoCoding/easyGPT/blob/main/npm_module/examples/pirateRule.js).                |
-| addResponse  | {String} content | Manually add a response from ChatGPT. Check out<br />[Chat completion - OpenAI API](https://platform.openai.com/docs/guides/chat/introduction), for the addResponse method easyGPT<br />uses "assistant" as the role. For an example of addResponse in use<br />look at **[framedResponse.js](https://github.com/FrancescoCoding/easyGPT/blob/main/npm_module/examples/framedResponse.js).** |
-| addMessage   | {String} content  | Add a prompt to later ask ChatGPT. Check out<br />[Chat completion - OpenAI API](https://platform.openai.com/docs/guides/chat/introduction), for the addMessage method easyGPT<br />uses "user" as the role.                                                                                                                                                                                     |
-| clearChat    |                   | Clears the list of previous messages, responses and rules. For a<br />completely new conversation.                                                                                                                                                                                                                                                                                            |
-| importChat   | {Array} chatLog  | A list of messages, exported from exportChat(); You might use<br />this to import a previously saved conversation.                                                                                                                                                                                                                                                                            |
-| exportChat   |                   | Returns a list of messages which can be saved or added to a<br />new instance with importChat.                                                                                                                                                                                                                                                                                                |
-| setMaxTokens | {Number} tokens   | Limits the maximum amount of tokens ChatGPT can use per request.<br />[Pricing (openai.com)](https://openai.com/pricing) gpt-3.5-turbo $0.002 / 1K tokens.                                                                                                                                                                                                                                      |
-| async ask    |                   | Returns a response from the ChatGPT API for your list of messages,<br />rules & responses. You must await for this response.                                                                                                                                                                                                                                                                  |
+More advanced methods for fine tuning can be found inside the advanced paramater of a defined easyGPT instance.
+
+```javascript
+import EasyGpt from "easygpt";
+const instance = new EasyGpt();
+
+// Advanced methods.
+instance.advanced.METHOD_NAME_HERE();
+```
+
+| Method              | Parameters                 | Explanation                                                                                                                                                                                                                        |
+| ------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| setMaxTokens        | {Number} tokens            | Limits the maximum amount of tokens ChatGPT can use per request.<br />[Pricing (openai.com)](https://openai.com/pricing) gpt-3.5-turbo $0.002 / 1K tokens.                                                                           |
+| importChat          | {Array} chatLog           | A list of messages, exported from exportChat(); You might use<br />this to import a previously saved conversation.                                                                                                                 |
+| exportChat          |                            | Returns a list of messages which can be saved or added to a<br />new instance with importChat.                                                                                                                                     |
+| changeModel         | {String} model             | [Models - OpenAI API](https://platform.openai.com/docs/models/gpt-3) - You can expirement with different OpenAI models.<br />easyGPT defaults to "gpt-3.5-turbo". Limited testing has been done with other models.                   |
+| setTemperature      | {Number} temperature      | Influence how focussed or random a response should be.<br /><br />A higher value results in a more random response. <br /><br />Where a lower value results in a more focussed response.<br /><br />Value must be between 0 and 2. |
+| setPresencePenalty  | {Number} presencePenalty  | Influence the likelihood of ChatGPT talking about new topics.<br /><br />Positive values increase the likelihood.<br />Negative values decrease the likelihood.<br /><br />Value must be between -2 and 2.                         |
+| setFrequencyPenalty | {Number} frequencyPenalty | Influence the likelihood of ChatGPT repeating itself.<br /><br />Positive values decrease the likelihood.<br />Negative values increase the likelihood.<br /><br />Value must be betweeen -2 and 2.                                |
+
+More advanced options will be provided in the future.
 
 ### Response Object
 
@@ -128,12 +142,14 @@ console.log(response.content);
 | content   | {String} | The text output of ChatGPT.                   |
 | rawResult | {Object} | The raw result obtained from the ChatGPT API. |
 
-## Finishing notes
+## Credits
 
-Created by [Francesco Gruosso](https://github.com/FrancescoCoding) and [Adam Govier](https://github.com/AdamGovier)
+##### Created By
 
-## Changelog
+Francesco Gruosso - [Github](https://github.com/FrancescoCoding) / [LinkedIn](https://www.linkedin.com/in/fran-dev/) / [Website](https://fran-dev.com/portfolio)
 
-### 3.1.11
+Adam Govier - [Github](https://github.com/AdamGovier) / [LinkedIn](https://www.linkedin.com/in/adam-govier/) / [Website](https://adamgovier.co.uk/)
 
-- No breaking changes. Added TypeScript support by adding the package's type definitions!
+##### Further Contributors
+
+[IllogicalTree](https://github.com/IllogicalTree)

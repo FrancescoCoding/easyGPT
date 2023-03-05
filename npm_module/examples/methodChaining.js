@@ -7,7 +7,9 @@ dotenv.config(); // Load .env file
 
 (new EasyGpt())
     .setApiKey(process.env.API_KEY)
-    .addMessage("Hello ChatGPT!")
+    .addMessage("ChatGPT sing for me!")
+    .advanced.setTemperature(1.2)
+    .advanced.setMaxTokens(200)
     .ask()
     .then(r => 
         console.log(r.content)    

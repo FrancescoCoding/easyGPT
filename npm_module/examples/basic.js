@@ -19,6 +19,5 @@ const response = await gpt.ask();
 // Print ChatGPT's response to the console!
 console.log(response.content);
 
-
 // EXAMPLE OUTPUT
 // ! Hello! How can I assist you today?
