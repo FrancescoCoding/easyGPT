@@ -1,5 +1,8 @@
-# easyGPT: a gpt-3.5-turbo (ChatGPT model) API wrapper 🤖
+# easyGPT: a gpt-3.5-turbo (ChatGPT) API wrapper 🤖
 
+## Check out the original repository for more examples: [easyGPT Repository on GitHub](https://github.com/FrancescoCoding/easyGPT)
+
+# Documentation
 This quick guide provides step-by-step instructions for using the easygpt wrapper that sends requests to the ChatGPT API and returns you a response.
 
 For more information about how the API works and fine-tuning for specific cases, please refer to [OpenAI&#39;s official documentation](https://platform.openai.com/docs/introduction)
@@ -45,7 +48,9 @@ Create one for free @ [https://platform.openai.com/account/api-keys](https://pla
 
 ```javascript
 // Add a prompt you would like to say to ChatGPT.
-gpt.addMessage("Hello ChatGPT!");
+gpt.addMessage("Hello ChatGPT!")
+// Give some instructions to the AI
+    .addRule("Use emoticons in every answer and use a friendly tone.")
 
 // Get the response from ChatGPT.
 const response = await gpt.ask();
@@ -54,7 +59,7 @@ const response = await gpt.ask();
 console.log(response.content);
 
 // EXAMPLE OUTPUT
-// ! Hello! How can I assist you today?
+// ! Hello! How can I assist you today? 😊
 ```
 
 ### Multiple Messages
@@ -100,7 +105,7 @@ console.log(response.content);
 
 | Paramater   | Explanation                                                                                                                                                                                                                                                      |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| saveContext | saveContext allows you to disable the saving of messages, rules & responses.<br />By default this is set to true. Please see this [example](https://github.com/FrancescoCoding/easyGPT/blob/main/npm_module/examples/noContext.js) for a more clear understanding. |
+| saveContext | saveContext allows you to disable the saving of messages, rules & responses.<br />By default this is set to true. Please see this [example](https://github.com/FrancescoCoding/easyGPT/blob/main/npm_module/examples/noContext.js) for a more clear understanding. |  
 
 | Method      | Parameters        | Explanation                                                                                                                                                                                                                                                                                                                                                                                   |
 | ----------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -124,3 +129,7 @@ console.log(response.content);
 ## Finishing notes
 
 Created by [Francesco Gruosso](https://github.com/FrancescoCoding) and [Adam Govier](https://github.com/AdamGovier)
+
+## Changelog
+### 3.1.11
+- No breaking changes. Added TypeScript support by adding the package's type definitions!
