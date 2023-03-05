@@ -75,7 +75,8 @@ gpt.addMessage("Hello ChatGPT! My name is Adam!");
 let response = await gpt.ask();
 
 // Print ChatGPT's response to the console!
-console.log(response.content);
+const { content: answer } = await gpt.ask();
+console.log(answer);
 
 // EXAMPLE OUTPUT
 // ! Hello Adam! It's nice to meet you. How can I assist you today?
@@ -113,7 +114,7 @@ console.log(response.content);
 
 ### Advanced
 
-More advanced methods for fine tuning can be found inside the advanced paramater of a defined easyGPT instance.
+More advanced methods for fine tuning can be found inside the advanced parameter of a defined easyGPT instance.
 
 ```javascript
 import EasyGpt from "easygpt";
