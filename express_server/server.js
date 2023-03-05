@@ -18,6 +18,7 @@ app.post("/askgpt", async (req, res) => {
 
   const gpt = new EasyGpt();
 
+  // Sample gpt object handling
   gpt
     .setApiKey(OPENAI_API_KEY)
     .addRule(
@@ -26,7 +27,7 @@ app.post("/askgpt", async (req, res) => {
     .addRule("Use emoticons in every answer and super often.")
     .addMessage("Hello! How are you");
 
-  // Sample response handling
+  // Sample single response handling
   const { content: answer } = await gpt.ask();
   console.log(answer);
 
@@ -34,7 +35,7 @@ app.post("/askgpt", async (req, res) => {
     // Ask ChatGPT API with a request body and multiple messages
     const responses = await Promise.all(
       messages.map(async (message) => {
-        gpt.addMessage(message.content, message.role);
+        gpt.addMessage(message.content);
         return await gpt.ask();
       })
     );
@@ -56,7 +57,7 @@ app.post("/askgpt", async (req, res) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
