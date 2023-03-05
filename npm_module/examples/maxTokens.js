@@ -16,7 +16,7 @@ gpt.addMessage("Write to me about climate change.");
 // $0.002 / 1K tokens
 // ChatGPT charges on how many tokens you use. If you wish to limit these costs you can set the maximum amount of tokens used per message.
 // You may ender up with a shorter response because of it.
-gpt.setMaxTokens(100);
+gpt.advanced.setMaxTokens(100);
 
 // The parsed response object that the ChatGPT API responds with.
 const response = await gpt.ask();

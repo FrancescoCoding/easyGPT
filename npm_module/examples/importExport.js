@@ -21,7 +21,7 @@ gpt.addMessage("Hello ChatGPT!")
     );
 
 // Export the chatLog and print to the console.
-const chatLog = gpt.exportChat();
+const chatLog = gpt.advanced.exportChat();
 // console.log(chatLog);
 
 // Create another instance as an example of import.
@@ -29,7 +29,7 @@ const newChat = new EasyGpt();
 gpt.setApiKey(process.env.API_KEY);
 
 // Import the chat log from earlier.
-newChat.importChat(chatLog);
+newChat.advanced.importChat(chatLog);
 
 // Continue the conversation.
 newChat.addMessage("What was it that we were talking about again?");

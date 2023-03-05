@@ -4,33 +4,53 @@ import Message from "./Message.js";
 export default class EasyGpt {
   #messages;
   #saveContext;
-  #maxTokens; // "By default, the number of tokens the model can return will be (4096 - prompt tokens)." https://platform.openai.com/docs/api-reference/chat/create
+  #API_KEY;
+  #model;
+
+  // ChatGPT Options
+  #options;
 
   constructor(saveContext) {
-    this.model = "gpt-3.5-turbo";
+    this.#model = "gpt-3.5-turbo";
     this.#messages = [];
     this.#saveContext = saveContext ?? true;
+
+    this.#options = {
+      max_tokens: undefined,
+      temperature: undefined,
+      presence_penalty: undefined,
+    };
+
+    this.advanced = {
+      setMaxTokens: this.#setMaxTokens.bind(this),
+      setTemperature: this.#setTemperature.bind(this),
+      setPresencePenalty: this.#setPresencePenalty.bind(this),
+      setFrequencyPenalty: this.#setFrequencyPenalty.bind(this),
+      exportChat: this.#exportChat.bind(this),
+      importChat: this.#importChat.bind(this),
+      changeModel: this.#changeModel.bind(this),
+    };
   }
 
   /**
    *
    * @param {String} API_KEY ChatGPT API key https://platform.openai.com/account/api-keys
-   * @returns working instance.
+   * @returns {Object} working instance.
    */
   setApiKey(API_KEY) {
-    this.API_KEY = API_KEY;
+    this.#API_KEY = API_KEY;
 
     // Builder pattern. Allows for trailing functions.
     return this;
   }
 
   /**
-   * Fine tune with different models.
+   * Fine tune with different models. Default "gpt-3.5-turbo".
    * @param {String} model https://platform.openai.com/docs/models/gpt-3-5
-   * @returns working instace.
+   * @returns {Object} working instace.
    */
-  changeModel(model) {
-    this.model = model;
+  #changeModel(model) {
+    this.#model = model;
 
     return this;
   }
@@ -38,7 +58,7 @@ export default class EasyGpt {
   /**
    * addRule is a function that allows you to add a rule to the chatbot.
    *  @param {String} rule The rule you want to add to the chatbot.
-   *  @returns working instance.
+   *  @returns {Object} working instance.
    */
   addRule(rule) {
     this.#messages.push(new Message(rule, "system"));
@@ -49,7 +69,7 @@ export default class EasyGpt {
   /**
    * Manually add a chatGPT response to the messages list.
    * @param {String} content The message content
-   * @returns working instance.
+   * @returns {Object} working instance.
    */
   addResponse(content) {
     this.#messages.push(new Message(content, "assistant"));
@@ -60,7 +80,7 @@ export default class EasyGpt {
   /**
    * add a message to the list of messages.
    * @param {String} content The message content
-   * @returns working instance.
+   * @returns {Object} working instance.
    */
   addMessage(content) {
     this.#messages.push(new Message(content, "user"));
@@ -70,7 +90,7 @@ export default class EasyGpt {
 
   /**
    * Removes all rules and previous messages.
-   * @returns working instance.
+   * @returns {Object} working instance.
    */
   clearChat() {
     this.#messages = [];
@@ -82,9 +102,9 @@ export default class EasyGpt {
    * Import a previous chat.
    * ! If the instance has been used before importing the chat, you may want to clear the chat using ```instace.clearChat();```
    * @param {Array} chatLog An array of messages. Typically retrieved from ```instance.exportChat();```
-   * @returns working instance.
+   * @returns {Object} working instance.
    */
-  importChat(chatLog) {
+  #importChat(chatLog) {
     this.#messages = [...this.#messages, ...chatLog];
 
     return this;
@@ -94,18 +114,70 @@ export default class EasyGpt {
    * Export the chat log so you can save it and import it again at a later date.
    * @returns chatLog: an array of messages.
    */
-  exportChat() {
+  #exportChat() {
     return this.#messages;
   }
 
   /**
-   * Limit the max amount of tokens used per request.
+   * Limit the max amount of tokens used per request for all further messages until set otherwise.
    * https://openai.com/pricing gpt-3.5-turbo	$0.002 / 1K tokens
    * @param {Number} tokens The limit of tokens.
-   * @returns working instance.
+   * @returns {Object} working instance.
    */
-  setMaxTokens(tokens) {
-    this.#maxTokens = tokens;
+  #setMaxTokens(tokens) {
+    this.#options.max_tokens = tokens;
+
+    return this;
+  }
+
+  /**
+   * Set the temperature for generating text for all further messages until set otherwise.
+   * Temperature controls the level of randomness in the generated output.
+   * https://platform.openai.com/docs/api-reference/chat/create.
+   * Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+   * @param {Number} temperature The temperature to use. Must be between 0 and 2.
+   * @returns {Object} The working instance.
+   */
+  #setTemperature(temperature) {
+    if (temperature > 2 || temperature < 0)
+      throw new Error("Temperature must be between 0 and 2.");
+
+    this.#options.temperature = temperature;
+
+    return this;
+  }
+
+  /**
+   * Set the penalty applied to new tokens based on their appearance in the text so far,
+   * affecting the model's likelihood to talk about new topics.
+   * Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+   * This value is set for all further messages until set otherwise
+   * https://platform.openai.com/docs/api-reference/chat/create
+   * @param {Number} presencePenalty The presence penalty to use. Must be between -2 and 2.
+   * @returns {Object} The working instance.
+   */
+  #setPresencePenalty(presencePenalty) {
+    if (presencePenalty > 2 || presencePenalty < -2)
+      throw new Error("The presence penalty must be between -2 and 2.");
+
+    this.#options.presence_penalty = presencePenalty;
+
+    return this;
+  }
+
+  /**
+    decrease/increase the model's likelihood to repeat the same line verbatim for all further messages until set otherwise.
+    Positive values: decrease.
+    Negative values: increase.
+    https://platform.openai.com/docs/api-reference/chat/create
+    @param {Number} frequencyPenalty The frequency penalty to use. Must be between -2 and 2.
+    @returns {Object} The working instance.
+  */
+  #setFrequencyPenalty(frequencyPenalty) {
+    if (frequencyPenalty > 2 || frequencyPenalty < -2)
+      throw new Error("The  frequency penalty must be between -2 and 2.");
+
+    this.#options.frequency_penalty = frequencyPenalty;
 
     return this;
   }
@@ -116,7 +188,7 @@ export default class EasyGpt {
    * @returns The message content.
    */
   async ask() {
-    if (!this.API_KEY)
+    if (!this.#API_KEY)
       throw Error("No API KEY PROVIDED USE instance.setApiKey(<your key>)");
 
     const apiUrl = "https://api.openai.com/v1/chat/completions"; // ChatGPT API URL
@@ -125,14 +197,14 @@ export default class EasyGpt {
       const response = await axios.post(
         apiUrl,
         {
-          model: this.model,
+          model: this.#model,
           messages: this.#createMessageFormElement(),
-          max_tokens: this.#maxTokens
+          ...this.#options, // Add options such as max_tokens
         },
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${this.API_KEY}`,
+            Authorization: `Bearer ${this.#API_KEY}`,
           },
         }
       );
