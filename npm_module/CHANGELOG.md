@@ -4,7 +4,7 @@ Added some missing API options after request: [Adjust temperature, presence_pena
 
 ## Features
 
-* Moved existing more complex methods under an advanced paramater.
+* Moved existing more complex methods under an advanced parameter.
 * Added setTemperature.
 * Added setPresencePenalty.
 * Added setFrequencyPenalty.
