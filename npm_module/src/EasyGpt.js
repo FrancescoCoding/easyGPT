@@ -16,19 +16,19 @@ export default class EasyGpt {
     this.#saveContext = saveContext ?? true;
 
     this.#options = {
-        max_tokens: undefined,
-        temperature: undefined,
-        presence_penalty: undefined
-    }
+      max_tokens: undefined,
+      temperature: undefined,
+      presence_penalty: undefined,
+    };
 
     this.advanced = {
-        setMaxTokens: this.#setMaxTokens.bind(this),
-        setTemperature: this.#setTemperature.bind(this),
-        setPresencePenalty: this.#setPresencePenalty.bind(this),
-        setFrequencyPenalty: this.#setFrequencyPenalty.bind(this),
-        exportChat: this.#exportChat.bind(this),
-        importChat: this.#importChat.bind(this),
-        changeModel: this.#changeModel.bind(this)
+      setMaxTokens: this.#setMaxTokens.bind(this),
+      setTemperature: this.#setTemperature.bind(this),
+      setPresencePenalty: this.#setPresencePenalty.bind(this),
+      setFrequencyPenalty: this.#setFrequencyPenalty.bind(this),
+      exportChat: this.#exportChat.bind(this),
+      importChat: this.#importChat.bind(this),
+      changeModel: this.#changeModel.bind(this),
     };
   }
 
@@ -131,15 +131,16 @@ export default class EasyGpt {
   }
 
   /**
-   * Set the temperature for generating text for all further messages until set otherwise. 
+   * Set the temperature for generating text for all further messages until set otherwise.
    * Temperature controls the level of randomness in the generated output.
    * https://platform.openai.com/docs/api-reference/chat/create.
    * Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
    * @param {Number} temperature The temperature to use. Must be between 0 and 2.
    * @returns {Object} The working instance.
-  */
+   */
   #setTemperature(temperature) {
-    if(temperature > 2 || temperature < 0) throw new Error("Temperature must be between 0 and 2.")
+    if (temperature > 2 || temperature < 0)
+      throw new Error("Temperature must be between 0 and 2.");
 
     this.#options.temperature = temperature;
 
@@ -147,23 +148,23 @@ export default class EasyGpt {
   }
 
   /**
-   * Set the penalty applied to new tokens based on their appearance in the text so far, 
+   * Set the penalty applied to new tokens based on their appearance in the text so far,
    * affecting the model's likelihood to talk about new topics.
    * Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
-   * This value is set for all further messages until set otherwise 
+   * This value is set for all further messages until set otherwise
    * https://platform.openai.com/docs/api-reference/chat/create
    * @param {Number} presencePenalty The presence penalty to use. Must be between -2 and 2.
    * @returns {Object} The working instance.
    */
   #setPresencePenalty(presencePenalty) {
-    if(presencePenalty > 2 || presencePenalty < -2) throw new Error("The presence penalty must be between -2 and 2.");
+    if (presencePenalty > 2 || presencePenalty < -2)
+      throw new Error("The presence penalty must be between -2 and 2.");
 
     this.#options.presence_penalty = presencePenalty;
 
     return this;
   }
 
-  
   /**
     decrease/increase the model's likelihood to repeat the same line verbatim for all further messages until set otherwise.
     Positive values: decrease.
@@ -173,7 +174,8 @@ export default class EasyGpt {
     @returns {Object} The working instance.
   */
   #setFrequencyPenalty(frequencyPenalty) {
-    if(frequencyPenalty > 2 || frequencyPenalty < -2) throw new Error("The  frequency penalty must be between -2 and 2.");
+    if (frequencyPenalty > 2 || frequencyPenalty < -2)
+      throw new Error("The  frequency penalty must be between -2 and 2.");
 
     this.#options.frequency_penalty = frequencyPenalty;
 
@@ -197,7 +199,7 @@ export default class EasyGpt {
         {
           model: this.#model,
           messages: this.#createMessageFormElement(),
-          ...this.#options // Add options such as max_tokens
+          ...this.#options, // Add options such as max_tokens
         },
         {
           headers: {
