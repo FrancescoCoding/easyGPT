@@ -4,6 +4,7 @@
   "description": "NPM module to communicate with the ChatGPT API",
   "main": "index.js",
   "types": "index.d.ts",
+  "type": "module",
   "keywords": [
     "chatgpt",
     "ChatGPT wrapper",

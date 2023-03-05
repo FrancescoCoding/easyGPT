@@ -3,11 +3,13 @@ import Message from "./Message.js";
 
 export default class EasyGpt {
   #messages;
+  #saveContext;
+  #maxTokens; // "By default, the number of tokens the model can return will be (4096 - prompt tokens)." https://platform.openai.com/docs/api-reference/chat/create
 
   constructor(saveContext) {
     this.model = "gpt-3.5-turbo";
     this.#messages = [];
-    this.saveContext = saveContext ?? true;
+    this.#saveContext = saveContext ?? true;
   }
 
   /**
@@ -97,6 +99,18 @@ export default class EasyGpt {
   }
 
   /**
+   * Limit the max amount of tokens used per request.
+   * https://openai.com/pricing gpt-3.5-turbo	$0.002 / 1K tokens
+   * @param {Number} tokens The limit of tokens.
+   * @returns working instance.
+   */
+  setMaxTokens(tokens) {
+    this.#maxTokens = tokens;
+
+    return this;
+  }
+
+  /**
    * Asks ChatGpt.
    * You must await the answer.
    * @returns The message content.
@@ -113,6 +127,7 @@ export default class EasyGpt {
         {
           model: this.model,
           messages: this.#createMessageFormElement(),
+          max_tokens: this.#maxTokens
         },
         {
           headers: {
@@ -125,7 +140,7 @@ export default class EasyGpt {
       const messageContent = response.data.choices[0].message.content;
 
       // Automatically add message to message list.
-      if (this.saveContext) {
+      if (this.#saveContext) {
         this.#messages.push(new Message(messageContent, "assistant"));
       } else {
         this.clearChat(); // Remove context.
