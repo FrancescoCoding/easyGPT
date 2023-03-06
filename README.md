@@ -9,4 +9,5 @@
 ## [npm_module](https://github.com/FrancescoCoding/Node-chatGPT-api-starter-template/tree/main/npm_module)
 This folder contains the code for an npm module that wraps the ChatGPT API. This module can be installed and used in any Node.js project to easily access the ChatGPT API.
 
-[Follow the npm package link for a quick start!](https://www.npmjs.com/package/easygpt)
+[Follow the npm package link for a quick start!](https://www.npmjs.com/package/easygpt)  
+[Or check out the documentation @ easygpt.dev](https://easygpt.dev/)  
