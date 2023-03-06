@@ -13,12 +13,13 @@ gpt.setApiKey(process.env.API_KEY);
 // Add a prompt you would like to say to ChatGPT.
 gpt.addMessage("Hello ChatGPT! My name is Adam!");
 
-// The parsed response object that the ChatGPT API responds with.
+// ChatGPT API response.
 // The reason for "let" is that we will be reusing response later.
 let response = await gpt.ask();
 
 // Print ChatGPT's response to the console!
-console.log(response.content);
+const { content: answer } = await gpt.ask();
+console.log(answer);
 
 // EXAMPLE OUTPUT
 // ! Hello Adam! It's nice to meet you. How can I assist you today?
@@ -26,11 +27,12 @@ console.log(response.content);
 // Add an aditional message to the stack.
 gpt.addMessage("What was my name again?");
 
-// The parsed response object that the ChatGPT API responds with.
-response = await gpt.ask();
+// ChatGPT API response.
+const { content: newAnswer } = await gpt.ask();
 
 // Print ChatGPT's response to the console!
-console.log(response.content);
+console.log(newAnswer);
 
 // EXAMPLE OUTPUT
 // ! Your name is Adam.
+
