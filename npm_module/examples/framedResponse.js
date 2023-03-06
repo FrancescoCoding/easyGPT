@@ -13,11 +13,11 @@ gpt.setApiKey(process.env.API_KEY);
 // Add a prompt you would like to say to ChatGPT.
 gpt.addMessage("Hello ChatGPT!");
 
-// Plant a response from ChatGPT.
-gpt.addResponse("What is 2 + 2?");
+// Plant a pre-written response from ChatGPT.
+gpt.addResponse("Hello! 😊 I am ChatGPT. How are you?");
 
-// You responding to above question.
-gpt.addMessage("Can you repeat your question?");
+// You responding to ChatGPT.
+gpt.addMessage("I am doing well! How are you? What can you do?");
 
 // The parsed response object that the ChatGPT API responds with.
 const response = await gpt.ask();
@@ -26,4 +26,4 @@ const response = await gpt.ask();
 console.log(response.content);
 
 // EXAMPLE OUTPUT
-// ! Of course! What is the answer to 2 + 2?
+// ! I am doing well, too! I can answer questions about the world, and I can tell you jokes. What would you like to know?
