@@ -16,7 +16,7 @@ gpt.addMessage("Hello ChatGPT!");
 // Plant a pre-written response from ChatGPT.
 gpt.addResponse("Hello! 😊 I am ChatGPT. How are you?");
 
-// You responding to above question.
+// You responding to ChatGPT.
 gpt.addMessage("I am doing well! How are you? What can you do?");
 
 // The parsed response object that the ChatGPT API responds with.
