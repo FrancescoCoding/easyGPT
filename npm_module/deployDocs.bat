@@ -1,0 +1,1 @@
+npm run docs:build&&cd docs/.vitepress/dist&&echo easygpt.dev > CNAME&&git init&&git add -A&&git commit -m 'Deploy'&&git push -f https://github.com/FrancescoCoding/easyGPT.git master:gh-pages&&cd ..
