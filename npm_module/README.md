@@ -13,7 +13,7 @@ gpt
 ```
 
 ## Installation
-Before installing make sure your Node.js version is atleast v14.
+Before installing make sure your Node.js version is at least v14.
 
 [Your project must be running ES Modules](https://easygpt.dev/guide/getting-started.html#setup).
 
