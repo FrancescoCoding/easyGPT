@@ -1,6 +1,6 @@
 <br/>
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://user-images.githubusercontent.com/64712227/223658360-1584fdf2-39c6-4895-9c25-4aafea32d780.png" width="220" alt="easyGPT Logo" /></a>
+  <a href="https://www.npmjs.com/package/easygpt" target="blank"><img src="https://user-images.githubusercontent.com/64712227/223658360-1584fdf2-39c6-4895-9c25-4aafea32d780.png" width="220" alt="easyGPT Logo" /></a>
 </p>
 <h1 align="center">easyGPT: A ChatGPT Express server and npm module 🤖</h1>
 <p align="center">
