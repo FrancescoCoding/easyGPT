@@ -1,4 +1,11 @@
-# easyGPT: A ChatGPT Express server and npm module 🤖
+<h1 align="center">easyGPT: A ChatGPT Express server and npm module 🤖</h1>
+<p align="center">
+ <a href="https://github.com/FrancescoCoding/easyGPT/blob/main/LICENSE%20%F0%9F%A4%96" target="_blank"><img src="https://img.shields.io/github/license/francescocoding/easygpt" alt="Package License" /></a>
+ <a href="https://www.npmjs.com/easygpt" target="_blank"><img src="https://img.shields.io/npm/v/easygpt" alt="NPM Version" /></a>
+ <a href="https://easygpt.dev" target="_blank"><img src="https://img.shields.io/badge/Docs-easygpt.dev-blue" alt="Documentation"/></a>
+ <a href="https://www.npmjs.com/easygpt" target="_blank"><img src="https://img.shields.io/npm/dw/easygpt" alt="NPM Downloads" /></a>
+ <a href="https://www.npmjs.com/easygpt" target="_blank"><img src="https://img.shields.io/maintenance/yes/2023" alt="Maintained" /></a>
+</p>
 
 ## This project contains:
 <a href="url"><img src="https://user-images.githubusercontent.com/64712227/222500018-e1aa2fe4-9a61-4205-bba8-f1d41b102156.png" align="left" height="360" ></a>
