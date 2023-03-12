@@ -36,7 +36,7 @@ OPENAI_API_KEY=<your-api-key>
 npm start
 ```
 
-The server should now be running on http://localhost:3000. You can test the server by sending a POST request to http://localhost:3000/ask-gpt3.5 with the following JSON body:
+The server should now be running on http://localhost:3000. You can test the server by sending a POST request to http://localhost:3000/askgpt with the following JSON body:
 ```
     "messages": [
         {
