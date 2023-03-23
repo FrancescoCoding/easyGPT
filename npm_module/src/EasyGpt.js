@@ -89,11 +89,52 @@ export default class EasyGpt {
   }
 
   /**
+   * Get all the messages in the chat.
+   * @returns {Array} messages
+   **/
+  getMessages() {
+    return this.#messages.filter(message => message.role !== "system");
+  }
+
+  /**
    * Removes all rules and previous messages.
    * @returns {Object} working instance.
    */
   clearChat() {
     this.#messages = [];
+
+    return this;
+  }
+
+  /**
+   * Removes all the messages in the chat except for the system rules.
+   * The below returns the instance so you can chain functions.
+   * @returns {Object} working instance.
+   **/
+  clearChatButRules() {
+    this.#messages = this.#messages.filter(
+      message => message.role === "system"
+    );
+
+    return this;
+  }
+
+  /**
+   * Sends removes the chat if the max context is exceeded.
+   * Determines the number the model will consider when generating a response.
+   * Note that the more context you give the model, the more tokens will be used.
+   * It will also take longer to generate a response.
+   * @param {Number} maxContext The max context to allow (in messages).
+   * @returns {Object} working instance.
+   **/
+  clearMessagesIfExceedsMaxContext(maxContext) {
+    // currentContext is the number of interactions with the bot.
+    const currentContext = Math.floor(this.getMessages().length / 2);
+
+    if (currentContext >= maxContext) {
+      console.log("Clearing messages");
+      this.clearChatButRules();
+    }
 
     return this;
   }
