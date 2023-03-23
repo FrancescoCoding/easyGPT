@@ -44,7 +44,7 @@ app.post("/askgpt", async (req, res) => {
 
   try {
     const responses = await Promise.all(
-      messages.map(async (message) => {
+      messages.map(async message => {
         gpt.addMessage(message.content);
         return await gpt.ask();
       })
@@ -52,7 +52,7 @@ app.post("/askgpt", async (req, res) => {
 
     const answers = responses
       .filter((response, index) => messages[index].role !== "system")
-      .map((response) => response.content);
+      .map(response => response.content);
 
     console.log(answers);
 
