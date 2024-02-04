@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.0.3",
-    "easygpt": "^1.6.0",
+    "easygpt": "^1.6.2",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "nodemon": "^2.0.20"
