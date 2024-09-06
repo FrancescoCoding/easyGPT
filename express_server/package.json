@@ -14,6 +14,6 @@
     "easygpt": "^1.6.0",
     "express": "^4.19.2",
     "express-session": "^1.17.3",
-    "nodemon": "^2.0.22"
+    "nodemon": "^3.0.0"
   }
 }
