@@ -12,7 +12,7 @@
   "dependencies": {
     "dotenv": "^16.3.1",
     "easygpt": "^1.6.0",
-    "express": "^4.19.2",
+    "express": "^4.20.0",
     "express-session": "^1.17.3",
     "nodemon": "^2.0.22"
   }
