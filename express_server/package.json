@@ -10,7 +10,7 @@
   "author": "Francesco Gruosso & Adam Govier",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.4.7",
     "easygpt": "^1.6.0",
     "express": "^4.21.1",
     "express-session": "^1.18.1",
